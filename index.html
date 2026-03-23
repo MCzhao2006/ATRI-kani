@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=0.5,user-scalable=no">
+		<link rel="icon" type="image/x-icon" href="img/ico/ATRI128.gif" />
+		<link rel="stylesheet" type="text/css" href="css/atri.css"/>
+		<title>ATRI(YHN-04B-009)-kani</title>
+	</head>
+	<body>
+			<audio class="audio"></audio>
+		<div class="oo">
+			<span id="qus">The&ensp;Sound,ON&ensp;or&ensp;OFF?</span>
+			<span id="ocs">
+				<img title="Open Audio" class="oc" id="oc_o" src="img/ico/open.gif"/>
+				<img title="Close Audio" class="oc" id="oc_c" src="img/ico/close.gif"/>
+			</span>
+		</div>
+		<div class="ck"></div>
+			<div id="logo">
+					<img title="ATRI-My Dear Moments-" id="mdm" src="img/logoX.gif"/>
+				<div id="kani">
+						<img title="kani" width="100px" src="img/kani.gif"/>
+					<div id="int">X 0</div>
+				</div>
+			</div>
+		<div id="kanid">
+				<audio class="audio" id="aukani"></audio>
+		</div>
+			<a href="https://atri-anime.com/" id="at1a" target="_blank">
+				<div id="at1">
+					<div id="at1f">Anime</div><img title="ATRI-Anime" id="at1i" src="img/ico/atri1.jpg"/>
+				</div>
+			</a>
+				<span id="bls"><a href="#" id="bl" target="_blank"><img title="bilibili" class="ico" src="img/ico/bilico-zip.gif"/>bilibili</a></span>
+			<a href="https://atri-mdm.com/" id="at2a" target="_blank">
+				<div id="at2">
+					<div id="at2f">Game</div><img title="ATRI-GalGame" id="at2i" src="img/ico/atri2.jpg"/>
+				</div>
+			</a>
+		<script type="text/javascript">
+			document.ondragstart=function(){return false}//禁止网页元素拖动,增加体验感
+			const andDiv = document.getElementById('kanid')
+				const cks = document.querySelector('.ck')
+				let o = 0
+				cks.addEventListener('click', function(){
+					let para = document.createElement('span');//创建行
+					para.classList.add(`kanids${o}`)//添加二层行class
+					andDiv.appendChild(para);//父元素下添加标签:二层行
+					let par = document.createElement('audio');//创建音频架
+					par.classList.add(`auau${o}`)//添加二层音频架class
+					andDiv.appendChild(par);//父元素下添加标签:二层音频架
+					o++
+				})
+				
+			//开屏动画按钮交互，声音全部关闭或允许声音
+			const audio = document.querySelector('.audio')//获取背景音乐控件
+			audio.volume = 0.6//设置背景音乐为60%
+			const oc = document.querySelectorAll('.oc')//获取两个声音图标
+			const oo = document.querySelector('.oo')//获取整个开屏
+			for (c = 0; c <= 1; c++) {
+				oc[c].addEventListener('click', function(){
+					oo.classList.add('onoff')
+					setTimeout(function(){
+						oo.classList.add('fire')//适配火狐做的动画终止倒计时
+					}, 1900)
+				})
+			}//for控制两个按钮点击
+			const random = Math.floor(Math.random()*2)//随机挑一个背景音乐播放
+			const on = document.querySelector('#oc_o')//获取开启按钮
+			on.addEventListener('click', function() {
+				setTimeout(function(){
+					audio.innerHTML = `
+					<audio autoplay loop>
+						<source class="sou" src="audio/mp3/bgm${random}.mp3" type="audio/mp3"></source>
+						<source class="sou" src="audio/ogg/bgm${random}.ogg" type="audio/ogg"></source>
+					</audio>`
+				}, 10)
+			})
+			const off = document.querySelector('#oc_c')//获取关闭按钮
+				off.addEventListener('click', function() {
+					audio.remove()
+				})
+				
+				
+				let kl = off.addEventListener('click', function() {
+					return kl = 1
+				})
+				
+				
+			
+			
+				//kani x和y坐标跟随，左右飘动，音频，颜色,大小
+			
+			const click = document.querySelector('.ck')//获取点击区盒子
+			const kanid = document.querySelector('#kanid')//获取kani div
+			const color = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F']
+			let str = '#'//制作十六进制色码
+			let p = 0//计次(score和生成ID好像都能用)
+				click.addEventListener('click',function(e){
+	let auau = document.querySelector(`.auau${p}`)//获取kani音频
+	let kanids = document.querySelector(`.kanids${p}`)//获取kani文字span
+				let docuY = event.clientY//获取鼠标在页面的Y坐标
+				let fontS = Math.floor( (Math.random()+1)*20)//kani字大小21-39px
+				let i = 0
+				for (i; i <= 5; i++) {
+					str += color[Math.floor(Math.random()*16)]
+				}
+				let sec = (Math.random()+1) * 4//动画秒数4.0-7.9
+			if (i === 6) {
+				kanids.innerHTML= `
+				<span class="kanif${p}" style="position: absolute; left:90%;
+				-moz-animation: kani ${sec}s linear infinite;
+				-webkit-animation: kani ${sec}s linear infinite;
+				-o-animation: kani ${sec}s linear infinite;
+				animation: kani ${sec}s linear infinite;
+				white-space: nowrap;
+				top:${docuY}px; color:${str}; font-size:${fontS}px">
+				かに~~~</span>
+				`//打印kani文字
+					str = '#'//色调归零
+					
+				if(kl !== 1){
+					auau.innerHTML = `
+				<audio autoplay>
+					<source class="sou" src="audio/mp3/kani.mp3" type="audio/mp3"></source>
+					<source class="sou" src="audio/ogg/kani.ogg" type="audio/ogg"></source>
+				</audio>`
+				}//条件放声
+				
+			}
+				p++
+				//右上角kani数量变量
+					const num = document.querySelector('#int')
+					num.innerText = `X ${p}`
+				})
+		</script>
+	</body>
+</html>
